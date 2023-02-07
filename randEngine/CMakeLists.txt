@@ -1,19 +1,22 @@
-set(PROJECT_NAME randomNumberEngine)
+set(MODULE_NAME randomNumberEngine)
 
-set(HEADER_FILES "include/iRandomNumberGenerator.h" "include/randomNumberGenerator.tpp" "include/concurrentRandomNumberGenerator.tpp")
-set(TEST_FILES "randomNumberGenerator.test.cpp" "concurrentRandomNumberGenerator.test.cpp")
-
-
-add_library(${PROJECT_NAME} INTERFACE)
-target_include_directories(${PROJECT_NAME} INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
-
-if(NOT TEST_PROJECT)
-	add_executable("${PROJECT_NAME}_TEST" ${HEADER_FILES} ${TEST_FILES})
-else()
-	target_sources(TEST_PROJECT ${HEADER_FILES} ${TEST_FILES})
+set(HEADER_FILES "include/IGenerator.hpp" "include/GeneratorsPredefined.hpp")
+set(SOURCE_FILES "GeneratorsPredefined.cpp")
+set(TEST_FILES "GeneratorsPredefined.test.cpp")
+if(ALL_TEST_FILES)
+	list(APPEND ALL_TEST_FILES ${TEST_FILES})
 endif()
-INSTALL(TARGETS ${PROJECT_NAME} "${PROJECT_NAME}_TEST")
+
+add_library(${MODULE_NAME} ${SOURCE_FILES})
+target_include_directories(${MODULE_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include>")
+
+set(TEST GeneratorsPredefined_test)
+add_executable(${TEST} "GeneratorsPredefined.test.cpp")
+target_link_libraries(${TEST} ${MODULE_NAME})
+add_test(${MODULE_NAME}_${TEST} ${TEST})
+
+
 EXPORT(
-	TARGETS ${PROJECT_NAME}
-	FILE 	${PROJECT_NAME}LibraryConfig.cmake
+	TARGETS ${MODULE_NAME}
+	FILE 	${MODULE_NAME}LibraryConfig.cmake
 	)

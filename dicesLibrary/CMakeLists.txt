@@ -1,24 +1,30 @@
-cmake_minimum_required(VERSION 3.21)
-set(PROJECT_NAME dicesLibrary)
-project(${PROJECT_NAME})
+set(MODULE_NAME dicesLibrary)
 
 set(HEADER_FILES "include/Dice.hpp" "include/DiceSet.hpp")
 set(SOURCE_FILES "Dice.cpp" "DiceSet.cpp")
 set(TEST_FILES "Dice.test.cpp" "DiceSet.test.cpp")
-
-
-add_library(${PROJECT_NAME} ${HEADER_FILES} ${SOURCE_FILES})
-target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
-
-if(PROJECT_IS_TOP_LEVEL)
-	add_executable("${PROJECT_NAME}_TEST" ${HEADER_FILES} ${TEST_FILES})
-	INSTALL(TARGETS "${PROJECT_NAME}_TEST")
-else()
-	target_sources(TEST_PROJECT PUBLIC ${HEADER_FILES} ${TEST_FILES})
+if(ALL_TEST_FILES)
+	list(APPEND ALL_TEST_FILES ${TEST_FILES})
 endif()
 
-INSTALL(TARGETS ${PROJECT_NAME})
+
+add_library(${MODULE_NAME} ${HEADER_FILES} ${SOURCE_FILES})
+target_include_directories(${MODULE_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
+
+set(TEST Dice_test)
+add_executable(${TEST} "Dice.test.cpp")
+target_link_libraries(${TEST} ${MODULE_NAME})
+add_test(${MODULE_NAME}_${TEST} ${TEST})
+
+set(TEST DiceSet_test)
+add_executable(${TEST} "DiceSet.test.cpp")
+target_link_libraries(${TEST} ${MODULE_NAME})
+add_test(${MODULE_NAME}_${TEST} ${TEST})
+
+
+
+INSTALL(TARGETS ${MODULE_NAME})
 EXPORT(
-	TARGETS ${PROJECT_NAME}
-	FILE 	${PROJECT_NAME}LibraryConfig.cmake
+	TARGETS ${MODULE_NAME}
+	FILE 	${MODULE_NAME}LibraryConfig.cmake
 	)
