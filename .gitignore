@@ -33,3 +33,9 @@
 
 #FOLDERS
 build
+.vscode/launch.json
+.vscode/settings.json
+.vscode/tasks.json
+Testing/Temporary/CTestCostData.txt
+Testing/Temporary/LastTest.log
+.vscode/settings.json
