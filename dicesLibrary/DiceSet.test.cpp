@@ -1,5 +1,12 @@
+
+
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#include <doctest/doctest.h>
+
 #include <iostream>
 
-int main(){
-    std::cout<<"Test passed"<<std::endl;
+
+TEST_CASE("Succesfull_doctest_integration_test_for_DiceSet")
+{
+    CHECK(true);
 }

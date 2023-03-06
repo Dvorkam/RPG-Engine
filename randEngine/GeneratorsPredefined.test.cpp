@@ -1,11 +1,10 @@
 #include "include/GeneratorsPredefined.hpp"
 #include <iostream>
 
-int main(){
-    std::random_device r;
-    GeneratorMt19937 rng1({r(),r(),r()});
-    std::cout<<rng1.getRandomNumber()<<std::endl;
-    std::cout<<rng1.getRandomNumber()<<std::endl;
-    std::cout<<rng1.getRandomNumber()<<std::endl;
-    std::cout<<"Test passed"<<std::endl;
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#include <doctest/doctest.h>
+
+TEST_CASE("Succesfull_doctest_integration_test_for_GeneratorsPredefined")
+{
+    CHECK(true);
 }

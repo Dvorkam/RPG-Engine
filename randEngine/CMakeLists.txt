@@ -10,10 +10,11 @@ endif()
 add_library(${MODULE_NAME} ${SOURCE_FILES})
 target_include_directories(${MODULE_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include>")
 
+
 set(TEST GeneratorsPredefined_test)
 add_executable(${TEST} "GeneratorsPredefined.test.cpp")
-target_link_libraries(${TEST} ${MODULE_NAME})
-add_test(${MODULE_NAME}_${TEST} ${TEST})
+target_link_libraries(${TEST} ${MODULE_NAME} doctest::doctest)
+doctest_discover_tests(${TEST})
 
 
 EXPORT(

@@ -11,15 +11,13 @@ endif()
 add_library(${MODULE_NAME} ${HEADER_FILES} ${SOURCE_FILES})
 target_include_directories(${MODULE_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
 
-set(TEST Dice_test)
-add_executable(${TEST} "Dice.test.cpp")
-target_link_libraries(${TEST} ${MODULE_NAME})
-add_test(${MODULE_NAME}_${TEST} ${TEST})
 
-set(TEST DiceSet_test)
-add_executable(${TEST} "DiceSet.test.cpp")
-target_link_libraries(${TEST} ${MODULE_NAME})
-add_test(${MODULE_NAME}_${TEST} ${TEST})
+foreach(TEST IN LISTS TEST_FILES)
+	add_executable(${TEST} ${TEST})
+	target_link_libraries(${TEST} ${MODULE_NAME} doctest::doctest)
+	doctest_discover_tests(${TEST})
+endforeach()
+
 
 
 
