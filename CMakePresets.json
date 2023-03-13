@@ -1,0 +1,52 @@
+{
+    "version": 2,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 26,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "defaultRelease",
+            "displayName": "default preset using vcpkg",
+            "description": "",
+            "binaryDir": "${sourceDir}/build/",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/"
+            }
+        },
+        {
+            "name": "vcpkgWin",
+            "inherits": "defaultRelease",
+            "displayName": "Windows preset using vcpkg",
+            "generator": "Visual Studio 17 2022"
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "releaseWin",
+            "description": "",
+            "displayName": "releaseWin",
+            "configurePreset": "vcpkgWin",
+            "configuration": "Release"
+        },
+        {
+            "name": "debugWin",
+            "description": "",
+            "displayName": "debugWin",
+            "configurePreset": "vcpkgWin",
+            "configuration": "Debug"
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "testsWin",
+            "description": "",
+            "displayName": "testsWin",
+            "configurePreset": "vcpkgWin",
+            "output": {"outputOnFailure": true}
+        }
+    ]
+}

@@ -5,5 +5,6 @@
 
 TEST_CASE("Succesfull_doctest_integration_test_for_Dice")
 {
+    std::cout<<"test"<<std::endl;
     CHECK(false);
 }
