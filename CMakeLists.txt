@@ -10,7 +10,6 @@ set (CMAKE_CXX_STANDARD 20)
 
 enable_testing()
 
-
 find_package(doctest CONFIG REQUIRED)
 
 include(${doctest_DIR}/doctest.cmake)
