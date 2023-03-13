@@ -1,5 +1,5 @@
 {
-    "version": 2,
+    "version": 6,
     "cmakeMinimumRequired": {
         "major": 3,
         "minor": 26,
@@ -47,6 +47,18 @@
             "displayName": "testsWin",
             "configurePreset": "vcpkgWin",
             "output": {"outputOnFailure": true}
+        }
+    ],
+    "packagePresets": [
+        {
+            "name": "default",
+            "configurePreset": "vcpkgWin",
+            "generators": [
+                "ZIP"
+              ],
+              "output": {
+                "debug": false
+              }
         }
     ]
 }
