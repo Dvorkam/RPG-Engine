@@ -42,12 +42,11 @@ Based on your platform use either following or replace Linux with Win
   1. wget https://github.com/Kitware/CMake/releases/download/v3.26.0-rc6/cmake-3.26.0-rc6.tar.gz
   2. tar xzf cmake-3.26.0-rc6.tar.gz
   3. cd cmake-3.26.0-rc6
-  4. ./configure --prefix=/opt/cmake
+  4. ./configure
   5. gmake
   6. gmake install
-  7. sudo ln -s /opt/cmake/bin/cmake /usr/local/bin/vcpkg
 ### Ninja
-1. sudo wget -qO /opt/ninja/ninja.gz https://github.com/ninja-build/ninja/releases/latest/download/ninja-linux.zip
+1. sudo wget -qO /usr/local/bin/ninja.gz https://github.com/ninja-build/ninja/releases/latest/download/ninja-linux.zip
 2. sudo gunzip /opt/ninja/ninja.gz
-3. sudo ln -s /opt/ninja/ninja /usr/local/bin/ninja
+3. sudo chmod a+x /usr/local/bin/ninja
 
