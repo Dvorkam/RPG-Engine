@@ -11,10 +11,19 @@ A collection of libraries to be pottentially used as a basis for further project
   6. Ninja 1.11 or newer (for linux)
 
 ## Configure, build, test
-Based on your platform use either following or replace Linux with Win
-1. cmake --preset=vcpkgLinux
-2. cmake --build --preset=releaseLinux
-3. ctest --preset=testsLinux
+Based on your platform use one of the presets
+- cmake --preset={configurePresets}
+  - vcpkgWin
+  - vcpkgLinux
+- cmake --build --preset={buildPresets}
+  - debugWin / releaseWin
+  - debugLinux / releaseLinux
+- ctest --preset={testPresets}
+  -testWin
+  -testLinux
+- cpack --preset={packagePresets}
+  - TGZ
+  - ZIP
 
 ## Requirements installation (for reference)
 
