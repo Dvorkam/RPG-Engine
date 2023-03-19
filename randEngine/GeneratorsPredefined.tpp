@@ -1,6 +1,6 @@
 #pragma once
 #include <limits>
-#include "IGenerator.hpp"
+#include <randEngine/IGenerator.tpp>
 
 namespace generators{
     template<UniformRandomNumberGenerator Generator>

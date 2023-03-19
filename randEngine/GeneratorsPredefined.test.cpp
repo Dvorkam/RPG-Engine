@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "include/GeneratorsPredefined.hpp"
+#include <randEngine/GeneratorsPredefined.tpp>
 
 
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
@@ -13,7 +13,9 @@ TEST_CASE("Succesfull_doctest_integration_test_for_GeneratorsPredefined")
 
 TEST_CASE_TEMPLATE("() operator test for generators", 
 G, 
-generators::GeneratorMt19937, generators::GeneratorMt19937_64)
+generators::GeneratorMt19937, 
+generators::GeneratorMt19937_64, 
+generators::GeneratorGeneric<generators::DumbGenerator>)
 {
     using result_type = typename G::result_type;
     result_type seed = 2567890;
@@ -25,7 +27,9 @@ generators::GeneratorMt19937, generators::GeneratorMt19937_64)
 
 TEST_CASE_TEMPLATE("getRandomNumber() test for generators", 
 G, 
-generators::GeneratorMt19937, generators::GeneratorMt19937_64)
+generators::GeneratorMt19937, 
+generators::GeneratorMt19937_64, 
+generators::GeneratorGeneric<generators::DumbGenerator>)
 {
     using result_type = typename G::result_type;
     result_type seed = 2567890;
@@ -37,7 +41,9 @@ generators::GeneratorMt19937, generators::GeneratorMt19937_64)
 
 TEST_CASE_TEMPLATE("Min max test for predefined generators", 
 G, 
-generators::GeneratorMt19937, generators::GeneratorMt19937_64,generators::DumbGenerator)
+generators::GeneratorMt19937, 
+generators::GeneratorMt19937_64,
+generators::GeneratorGeneric<generators::DumbGenerator>)
 {
     using result_type = typename G::result_type;
     result_type seed = static_cast<result_type>(2567890);

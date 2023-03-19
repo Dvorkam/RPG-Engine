@@ -6,7 +6,7 @@
 #set(PUBLIC_HEADER_LIST ${HEADER_FILES})
 
 function(MD_ADD_AND_SETUP_LIB LIB_TYPE)
-    add_library(${LIB_NAME} ${LIB_TYPE} ${SOURCE_FILES})
+    add_library(${LIB_NAME} ${LIB_TYPE} ${SOURCE_FILES} ${HEADER_FILES} ${TEMPLATE_FILES})
     target_include_directories(${LIB_NAME} PUBLIC 
     $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}>  
     $<INSTALL_INTERFACE:include/${LIB_NAME}>  # <prefix>/include/mylib
