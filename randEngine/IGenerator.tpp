@@ -11,12 +11,13 @@ concept UniformRandomNumberGenerator = requires(G g) {
     { g.max() } -> std::same_as<typename G::result_type>;
     { g() } -> std::same_as<typename G::result_type>;
 
-    requires std::is_unsigned_v<typename G::result_type>;
-}
-&& 
+        requires std::is_unsigned_v<typename G::result_type>;
+    g.min() < g.max();
+};
+/*&&
     requires(G g) {
     g.min() < g.max();
-} || G::min() < G::max();
+} || G::min() < G::max();*/
 
 template <typename UIntRetType>
 class IGenerator{
