@@ -86,7 +86,9 @@
             "displayName": "testsWin",
             "configurePreset": "vcpkgWin",
             "output": {
-                "outputOnFailure": true
+                "outputOnFailure": true,
+                "quiet": true,
+                "labelSummary": true
             }
         },
         {
@@ -95,7 +97,9 @@
             "displayName": "testsLinux",
             "configurePreset": "vcpkgLinux",
             "output": {
-                "outputOnFailure": true
+                "outputOnFailure": true,
+                "quiet": true,
+                "labelSummary": true
             }
         }
     ],
