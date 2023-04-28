@@ -87,7 +87,6 @@
             "configurePreset": "vcpkgWin",
             "output": {
                 "outputOnFailure": true,
-                "quiet": true,
                 "labelSummary": true
             }
         },
@@ -98,7 +97,6 @@
             "configurePreset": "vcpkgLinux",
             "output": {
                 "outputOnFailure": true,
-                "quiet": true,
                 "labelSummary": true
             }
         }

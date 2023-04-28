@@ -19,15 +19,15 @@ namespace generators{
         {
             return std::numeric_limits<result_type>::max();
         }
-        virtual result_type operator()()
+        result_type operator()() override
         {
             return getRandomNumber();
         }
-        virtual result_type getRandomNumber()
+        result_type getRandomNumber() override
         {
             return generator();
         }
-        virtual void seed(result_type sseq)
+        void seed(result_type sseq) override
         {
             generator.seed(sseq);
         }
@@ -46,10 +46,9 @@ namespace generators{
             constexpr result_type min(){return 0;}
             constexpr result_type max(){return 255;}
 
-            virtual uint8_t operator ()(){return number++;}
-
-            virtual uint8_t getRandomNumber(){return number++;}
-            virtual void seed(uint8_t sseq){number = sseq;}
+            uint8_t operator ()()override{return number++;}
+            uint8_t getRandomNumber()override{return number++;}
+            void seed(uint8_t sseq)override{number = sseq;}
 
     };
 
