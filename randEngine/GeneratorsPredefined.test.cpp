@@ -18,7 +18,7 @@ generators::GeneratorMt19937_64,
 generators::GeneratorGeneric<generators::DumbGenerator>)
 {
     using result_type = typename G::result_type;
-    result_type seed = 2567890;
+    auto seed = static_cast<result_type>(2567890);
     G g1(seed);
     CHECK_NOTHROW(g1());
     CHECK_NE(g1(),g1());
@@ -32,7 +32,7 @@ generators::GeneratorMt19937_64,
 generators::GeneratorGeneric<generators::DumbGenerator>)
 {
     using result_type = typename G::result_type;
-    result_type seed = 2567890;
+    auto seed = static_cast<result_type>(2567890);
     G g1(seed);
     CHECK_NOTHROW(g1.getRandomNumber());
     CHECK_NE(g1.getRandomNumber(),g1.getRandomNumber());
@@ -46,7 +46,7 @@ generators::GeneratorMt19937_64,
 generators::GeneratorGeneric<generators::DumbGenerator>)
 {
     using result_type = typename G::result_type;
-    result_type seed = static_cast<result_type>(2567890);
+    auto seed = static_cast<result_type>(2567890);
     G g1(seed);
     CHECK_NOTHROW(g1.min());
     CHECK_NOTHROW(g1.max());
@@ -60,6 +60,6 @@ G,
 std::mt19937, std::mt19937_64, generators::DumbGenerator)
 {
     using result_type = typename G::result_type;
-    result_type seed = static_cast<result_type>(2567890);
+    auto seed = static_cast<result_type>(2567890);
     CHECK_NOTHROW(generators::GeneratorGeneric<G> gtest(seed));
 }
