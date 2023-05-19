@@ -39,7 +39,7 @@ generators::GeneratorGeneric<generators::DumbGenerator>)
     CHECK_NE(g1.getRandomNumber(),g1.getRandomNumber());
 }
 
-TEST_CASE_TEMPLATE("Min max test for predefined generators", 
+TEST_CASE_TEMPLATE("Test min and max values for predefined generators", 
 G, 
 generators::GeneratorMt19937, 
 generators::GeneratorMt19937_64,
@@ -51,11 +51,11 @@ generators::GeneratorGeneric<generators::DumbGenerator>)
     CHECK_NOTHROW(g1.min());
     CHECK_NOTHROW(g1.max());
     CHECK(g1.min()<g1.max());
-    CHECK_EQ(g1.min(),std::numeric_limits<result_type>::min());
-    CHECK_EQ(g1.max(),std::numeric_limits<result_type>::max());
+    static_assert(g1.min() == std::numeric_limits<result_type>::min(), "Minimum value does not match expected value");
+    static_assert(g1.max() == std::numeric_limits<result_type>::max(), "Maximum value does not match expected value");
 }
 
-TEST_CASE_TEMPLATE("verify generator concept", 
+TEST_CASE_TEMPLATE("Test generator concept for standard and custom generators", 
 G, 
 std::mt19937, std::mt19937_64, generators::DumbGenerator)
 {

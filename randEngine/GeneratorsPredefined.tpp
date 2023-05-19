@@ -1,3 +1,13 @@
+/**
+ * @file GeneratorsPredefined.tpp
+ * @author Michal D
+ * @brief Contains a set of predefined Uniform 
+ * @version 0.1
+ * @date 2023-04-29
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
 #pragma once
 #include <limits>
 #include <randEngine/IGenerator.tpp>
@@ -11,28 +21,42 @@ namespace generators{
         public:
         using result_type = typename Generator::result_type;
         GeneratorGeneric(result_type seed){generator.seed(seed);}
-        virtual constexpr result_type min()
+        constexpr result_type min() const noexcept override
         {
             return std::numeric_limits<result_type>::min();
         }
-        virtual constexpr result_type max()
+        constexpr result_type max() const noexcept override
         {
             return std::numeric_limits<result_type>::max();
         }
-        virtual result_type operator()()
+        result_type operator()() override
         {
             return getRandomNumber();
         }
-        virtual result_type getRandomNumber()
+        /**
+         * @brief Get the Random Number object
+         * 
+         * @return result_type 
+         */
+        result_type getRandomNumber() override
         {
             return generator();
         }
-        virtual void seed(result_type sseq)
+        /**
+         * @brief 
+         * 
+         * @param sseq 
+         */
+        void seed(result_type sseq) noexcept override
         {
             generator.seed(sseq);
         }
     };
 
+    /**
+     * @brief 
+     * 
+     */
     class DumbGenerator:public IGenerator<uint8_t>{
         public: 
         using result_type = uint8_t;
@@ -43,13 +67,12 @@ namespace generators{
         public:
             DumbGenerator(){};
             DumbGenerator(uint8_t seed):number(seed){};
-            constexpr result_type min(){return 0;}
-            constexpr result_type max(){return 255;}
+            constexpr result_type min() const noexcept override{return 0;}
+            constexpr result_type max() const noexcept override{return 255;}
 
-            virtual uint8_t operator ()(){return number++;}
-
-            virtual uint8_t getRandomNumber(){return number++;}
-            virtual void seed(uint8_t sseq){number = sseq;}
+            uint8_t operator ()()override{return number++;}
+            uint8_t getRandomNumber()override{return number++;}
+            void seed(uint8_t sseq) noexcept override{number = sseq;}
 
     };
 
