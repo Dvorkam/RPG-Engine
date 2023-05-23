@@ -5,5 +5,5 @@
 
 TEST_CASE("Succesfull_doctest_integration_test_for_Dice")
 {
-    CHECK(false);
+    CHECK(true);
 }

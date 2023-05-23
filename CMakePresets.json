@@ -1,0 +1,126 @@
+{
+    "version": 6,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 26,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "defaultRelease",
+            "displayName": "default release preset using vcpkg",
+            "description": "",
+            "binaryDir": "${sourceDir}/build/",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/"
+            }
+        },
+        {
+            "name": "defaultDebug",
+            "displayName": "default debug preset using vcpkg",
+            "description": "",
+            "binaryDir": "${sourceDir}/build/",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/"
+            }
+        },
+        {
+            "name": "vcpkgWin",
+            "inherits": "defaultRelease",
+            "displayName": "Windows preset using vcpkg",
+            "generator": "Visual Studio 17 2022"
+        },
+        {
+            "name": "vcpkgLinux",
+            "inherits": "defaultRelease",
+            "displayName": "Linux release preset using vcpkg",
+            "generator": "Ninja"
+        },
+        {
+            "name": "vcpkgLinuxD",
+            "inherits": "defaultDebug",
+            "displayName": "Linux debug preset using vcpkg",
+            "generator": "Ninja"
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "releaseWin",
+            "description": "",
+            "displayName": "releaseWin",
+            "configurePreset": "vcpkgWin",
+            "configuration": "Release"
+        },
+        {
+            "name": "debugWin",
+            "description": "",
+            "displayName": "debugWin",
+            "configurePreset": "vcpkgWin",
+            "configuration": "Debug"
+        },
+        {
+            "name": "releaseLinux",
+            "description": "",
+            "displayName": "releaseLinux",
+            "configurePreset": "vcpkgLinux",
+            "configuration": "Release"
+        },
+        {
+            "name": "debugLinux",
+            "description": "",
+            "displayName": "debugLinux",
+            "configurePreset": "vcpkgLinuxD",
+            "configuration": "Debug"
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "testsWin",
+            "description": "",
+            "displayName": "testsWin",
+            "configurePreset": "vcpkgWin",
+            "output": {
+                "outputOnFailure": true,
+                "labelSummary": true
+            }
+        },
+        {
+            "name": "testsLinux",
+            "description": "",
+            "displayName": "testsLinux",
+            "configurePreset": "vcpkgLinux",
+            "output": {
+                "outputOnFailure": true,
+                "labelSummary": true
+            }
+        }
+    ],
+    "packagePresets": [
+        {
+            "name": "TGZ",
+            "configurePreset": "vcpkgLinux",
+            "generators": [
+                "TGZ"
+            ],
+            "output": {
+                "debug": false
+            }
+        },
+        {
+            "name": "ZIP",
+            "configurePreset": "vcpkgWin",
+            "generators": [
+                "ZIP"
+            ],
+            "output": {
+                "debug": false
+            }
+        }
+    ]
+}
