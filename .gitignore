@@ -33,3 +33,7 @@
 
 #FOLDERS
 build
+.vscode/tasks.json
+Testing/Temporary/
+
+

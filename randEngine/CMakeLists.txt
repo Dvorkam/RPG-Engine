@@ -1,20 +1,14 @@
-set(MODULE_NAME randomNumberEngine)
+include(CommonFcns)
 
-set(HEADER_FILES "include/IGenerator.hpp" "include/GeneratorsPredefined.hpp")
+set(LIB_NAME randomNumberEngine)
+set(HEADER_FILES "")
+set(TEMPLATE_FILES "IGenerator.tpp" "GeneratorsPredefined.tpp")
 set(SOURCE_FILES "GeneratorsPredefined.cpp")
 set(TEST_FILES "GeneratorsPredefined.test.cpp")
-
-
-add_library(${MODULE_NAME} ${SOURCE_FILES})
-target_include_directories(${MODULE_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include>")
-
-set(TEST GeneratorsPredefined_test)
-add_executable(${TEST} "GeneratorsPredefined.test.cpp")
-target_link_libraries(${TEST} ${MODULE_NAME})
-add_test(${MODULE_NAME}_${TEST} ${TEST})
-
-
-EXPORT(
-	TARGETS ${MODULE_NAME}
-	FILE 	${MODULE_NAME}LibraryConfig.cmake
-	)
+if(ALL_TEST_FILES)
+	list(APPEND ALL_TEST_FILES ${TEST_FILES})
+endif()
+set(PUBLIC_HEADER_LIST ${TEMPLATE_FILES})
+MD_ADD_AND_SETUP_LIB(STATIC)
+MD_ADD_AND_SETUP_TESTS()
+MD_INSTALL()
