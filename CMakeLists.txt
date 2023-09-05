@@ -9,13 +9,15 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 enable_testing()
 
-find_package(doctest CONFIG REQUIRED)
+#find_package(doctest CONFIG REQUIRED)
+find_package(GTest CONFIG REQUIRED)
+include(GoogleTest)
 
-include(${doctest_DIR}/doctest.cmake)
-add_executable(MAIN_TEST "doctest.test.cpp")
+#include(${doctest_DIR}/doctest.cmake)
+#add_executable(MAIN_TEST "doctest.test.cpp")
 
-doctest_discover_tests(MAIN_TEST)
-target_link_libraries(MAIN_TEST PRIVATE doctest::doctest)
+#doctest_discover_tests(MAIN_TEST)
+#target_link_libraries(MAIN_TEST PRIVATE doctest::doctest)
 
 add_subdirectory("randEngine")
 add_subdirectory("dicesLibrary")
