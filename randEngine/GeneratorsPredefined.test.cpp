@@ -1,61 +1,55 @@
 #include <iostream>
+#include <memory>
+#include <limits>
+
 #include <randEngine/GeneratorsPredefined.tpp>
 
 #include <gtest/gtest.h>
 
-TEST(randEngine_generic, gtest_integration)
-{
+TEST(diceLibrary_generic, gtest_GeneratorsPredefined_integration) {
+    // Your test code goes here
     ASSERT_TRUE(true);
 }
 
+using GeneratorTypes = ::testing::Types<
+    generators::GeneratorMt19937,
+    generators::GeneratorMt19937_64,
+    generators::GeneratorGeneric<generators::DumbGenerator>
+>;
+
 template <typename GeneratorType>
-class GeneratorTest : public testing::Test {
-protected:
+class GeneratorTest : public ::testing::Test {
+public:
     using result_type = typename GeneratorType::result_type;
-    GeneratorType generator;
+protected:
+    std::unique_ptr<GeneratorType> generator;
 
     void SetUp() override {
         result_type seed = static_cast<result_type>(2567890);
-        generator = GeneratorType(seed);
+        generator = std::make_unique<GeneratorType>(seed);
+    }
+    void TearDown() override{
+        generator.reset();
     }
 };
 
-template <typename T>
-class MyFixture : public testing::Test {
- public:
-  ...
-  using List = std::list<T>;
-  static T shared_;
-  T value_;
-};
-
-
-using MyTypes = ::testing::Types<generators::GeneratorMt19937,
-                                    generators::GeneratorMt19937_64,
-                                    generators::GeneratorGeneric<generators::DumbGenerator>>;
-TYPED_TEST_SUITE(MyFixture, MyTypes);
-
-
-TYPED_TEST(GeneratorTest, OperatorParenthesesTest) {
-    EXPECT_NO_THROW(this->generator());
-    EXPECT_NE(this->generator(), this->generator());
-    EXPECT_NE(this->generator(), this->generator());
+TYPED_TEST_SUITE(GeneratorTest, GeneratorTypes);
+TYPED_TEST(GeneratorTest, getRandomNumberTest) {
+    EXPECT_NO_THROW(this->generator->getRandomNumber());
+    EXPECT_NE(this->generator->getRandomNumber(), this->generator->getRandomNumber());
+    EXPECT_NE(this->generator->getRandomNumber(), this->generator->getRandomNumber());
 }
 
-//TEST_CASE_TEMPLATE("getRandomNumber() test for generators", 
-//G, 
-//generators::GeneratorMt19937, 
-//generators::GeneratorMt19937_64, 
-//generators::GeneratorGeneric<generators::DumbGenerator>)
-//{
-//    using result_type = typename G::result_type;
-//    auto seed = static_cast<result_type>(2567890);
-//    G g1(seed);
-//    CHECK_NOTHROW(g1.getRandomNumber());
-//    CHECK_NE(g1.getRandomNumber(),g1.getRandomNumber());
-//    CHECK_NE(g1.getRandomNumber(),g1.getRandomNumber());
-//}
-//
+TYPED_TEST(GeneratorTest, minMaxValTest) {
+    using result_type = typename TestFixture::result_type;
+    EXPECT_LT(this->generator->min(), this->generator->max());
+    auto min = std::numeric_limits<unsigned int>::min();
+    auto max = std::numeric_limits<unsigned int>::max();
+    EXPECT_EQ(this->generator->min(), min);
+    EXPECT_EQ(this->generator->max(), max);
+    }
+
+
 //TEST_CASE_TEMPLATE("Test min and max values for predefined generators", 
 //G, 
 //generators::GeneratorMt19937, 
