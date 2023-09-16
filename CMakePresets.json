@@ -87,7 +87,7 @@
             "configurePreset": "vcpkgWin",
             "output": {
                 "outputOnFailure": true,
-                "labelSummary": true
+                "labelSummary": false
             }
         },
         {
@@ -98,28 +98,6 @@
             "output": {
                 "outputOnFailure": true,
                 "labelSummary": true
-            }
-        }
-    ],
-    "packagePresets": [
-        {
-            "name": "TGZ",
-            "configurePreset": "vcpkgLinux",
-            "generators": [
-                "TGZ"
-            ],
-            "output": {
-                "debug": false
-            }
-        },
-        {
-            "name": "ZIP",
-            "configurePreset": "vcpkgWin",
-            "generators": [
-                "ZIP"
-            ],
-            "output": {
-                "debug": false
             }
         }
     ]
