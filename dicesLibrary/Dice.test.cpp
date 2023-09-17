@@ -1,9 +1,7 @@
 #include <iostream>
+#include <gtest/gtest.h>
 
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include <doctest/doctest.h>
-
-TEST_CASE("Succesfull_doctest_integration_test_for_Dice")
-{
-    CHECK(true);
+TEST(diceLibrary_generic, gtest_Dice_integration) {
+    // Your test code goes here
+    ASSERT_TRUE(true);
 }

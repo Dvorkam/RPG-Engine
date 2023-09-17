@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug Google Test",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${cmake.testProgram}",
+            "args": [ "${cmake.testArgs}" ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "console":"internalConsole",
+            //"preLaunchTask": "build"
+        }
+    ]
+}
