@@ -76,11 +76,3 @@ TYPED_TEST(ConceptTest, nothrow){
     using result_type = typename TestFixture::result_type;
     EXPECT_TRUE(true);
 }
-//TEST_CASE_TEMPLATE("Test generator concept for standard and custom generators", 
-//G, 
-//std::mt19937, std::mt19937_64, generators::DumbGenerator)
-//{
-//    using result_type = typename G::result_type;
-//    auto seed = static_cast<result_type>(2567890);
-//    CHECK_NOTHROW(generators::GeneratorGeneric<G> gtest(seed));
-//}
