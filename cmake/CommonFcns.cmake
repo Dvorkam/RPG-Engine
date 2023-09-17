@@ -17,15 +17,6 @@ function(MD_ADD_AND_SETUP_LIB LIB_TYPE)
     
 endfunction()
 
-function(MD_ADD_AND_SETUP_TESTS)
-    foreach(TEST IN LISTS TEST_FILES)
-        add_executable(${TEST} ${TEST})
-        target_link_libraries(${TEST} ${LIB_NAME} doctest::doctest)
-        target_compile_features(${TEST} PRIVATE cxx_std_20)
-        doctest_discover_tests(${TEST})
-    endforeach()
-endfunction()
-
 function(MD_ADD_AND_SETUP_GTESTS TEST_GROUP_NAME)
     foreach(TEST IN LISTS TEST_FILES)
         add_executable(${TEST} ${TEST})
