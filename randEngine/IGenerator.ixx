@@ -1,10 +1,14 @@
+module;
+//#include <random>
+//#include <concepts>
+//#include <type_traits>
 
-#pragma once
-#include <random>
-#include <concepts>
-#include <type_traits>
+export module randengine.concepts;
+import <random>;
+import <concepts>;
+import <type_traits>;
 
-template <typename G>
+export template <typename G>
 concept UniformRandomNumberGenerator = requires(G g) {
     typename G::result_type;
     { g.min() } -> std::same_as<typename G::result_type>;
@@ -14,7 +18,7 @@ concept UniformRandomNumberGenerator = requires(G g) {
     g.min() < g.max();
 };
 
-template <typename UIntRetType>
+export template <typename UIntRetType>
 class IGenerator{
     public:
     using result_type = UIntRetType;

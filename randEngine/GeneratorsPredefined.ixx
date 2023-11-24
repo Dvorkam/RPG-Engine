@@ -8,11 +8,17 @@
  * @copyright Copyright (c) 2023
  * 
  */
-#pragma once
-#include <limits>
-#include <randEngine/IGenerator.tpp>
+module;
+//#include <limits>
+//#include <random>
 
-namespace generators{
+export module randengine.generators;
+import <limits>;
+import <random>;
+
+import randengine.concepts;
+
+export namespace generators{
     template<UniformRandomNumberGenerator Generator>
     class GeneratorGeneric:public IGenerator<typename Generator::result_type>{
         Generator generator;
@@ -53,10 +59,6 @@ namespace generators{
         }
     };
 
-    /**
-     * @brief 
-     * 
-     */
     class DumbGenerator:public IGenerator<uint8_t>{
         public: 
         using result_type = uint8_t;

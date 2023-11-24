@@ -1,10 +1,18 @@
-#include <iostream>
-#include <memory>
-#include <limits>
-
-#include <randEngine/GeneratorsPredefined.tpp>
+//#include <iostream>
+//#include <memory>
+//#include <limits>
+//#include <random>
 
 #include <gtest/gtest.h>
+
+import randengine.concepts;
+import randengine.generators;
+
+import <iostream>;
+import <memory>;
+import <limits>;
+import <random>;
+
 
 TEST(diceLibrary_generic, gtest_GeneratorsPredefined_integration) {
     // Your test code goes here
@@ -58,8 +66,10 @@ protected:
 TYPED_TEST_SUITE(GeneratorTest, GeneratorTypes);
 TYPED_TEST(GeneratorTest, getRandomNumberTest) {
     EXPECT_NO_THROW(this->generator->getRandomNumber());
-    EXPECT_NE(this->generator->getRandomNumber(), this->generator->getRandomNumber());
-    EXPECT_NE(this->generator->getRandomNumber(), this->generator->getRandomNumber());
+    EXPECT_NE(this->generator->getRandomNumber(),
+    this->generator->getRandomNumber());
+    EXPECT_NE(this->generator->getRandomNumber(),
+    this->generator->getRandomNumber());
 }
 
 TYPED_TEST(GeneratorTest, minMaxValTest) {
@@ -74,5 +84,6 @@ TYPED_TEST(GeneratorTest, minMaxValTest) {
 TYPED_TEST_SUITE(ConceptTest, UniformRandomNumberGeneratorConceptTypes);
 TYPED_TEST(ConceptTest, nothrow){
     using result_type = typename TestFixture::result_type;
+
     EXPECT_TRUE(true);
 }
