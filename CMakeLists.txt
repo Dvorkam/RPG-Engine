@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.26)
+cmake_minimum_required(VERSION 3.28)
 project("RPGEngine"
 	VERSION 0.0.1
 	DESCRIPTION "Project that aims to prepare tools for further project."
@@ -6,18 +6,13 @@ project("RPGEngine"
 	)
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_STANDARD 20)
 enable_testing()
 
 #find_package(doctest CONFIG REQUIRED)
 find_package(GTest CONFIG REQUIRED)
 include(GoogleTest)
-
-#include(${doctest_DIR}/doctest.cmake)
-#add_executable(MAIN_TEST "doctest.test.cpp")
-
-#doctest_discover_tests(MAIN_TEST)
-#target_link_libraries(MAIN_TEST PRIVATE doctest::doctest)
 
 add_subdirectory("randEngine")
 add_subdirectory("dicesLibrary")
@@ -54,7 +49,7 @@ write_basic_package_version_file(
   COMPATIBILITY SameMajorVersion
   )
 
-### Install Config and ConfigVersion files
+## Install Config and ConfigVersion files
 install(
   FILES "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
         "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"

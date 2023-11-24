@@ -23,13 +23,15 @@ function(MD_ADD_AND_SETUP_GTESTS TEST_GROUP_NAME)
         target_link_libraries(${TEST} ${LIB_NAME} GTest::gtest_main)
         target_compile_features(${TEST} PRIVATE cxx_std_20)
         add_test(${TEST_GROUP_NAME} ${TEST})
-        gtest_discover_tests(${TEST})
+        gtest_discover_tests(${TEST} DISCOVERY_MODE PRE_TEST)
     endforeach()
 endfunction()
 
 function(MD_INSTALL)
-    install(TARGETS ${LIB_NAME}
+    install(
+        TARGETS ${LIB_NAME}
         EXPORT "${PROJECT_NAME}Targets"
+        FILE_SET HEADERS
         COMPONENT runtime
         PUBLIC_HEADER DESTINATION "include/${LIB_NAME}"
         COMPONENT dev
