@@ -35,5 +35,7 @@
 build
 .vscode/tasks.json
 Testing/Temporary/
+CMakeFiles
 
-
+#Files
+CMakeCache.txt
