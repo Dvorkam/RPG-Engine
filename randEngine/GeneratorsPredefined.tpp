@@ -10,6 +10,8 @@
  */
 #pragma once
 #include <limits>
+#include <mutex>
+
 #include <randEngine/IGenerator.tpp>
 
 namespace generators{
@@ -31,7 +33,7 @@ namespace generators{
         }
         result_type operator()() override
         {
-            return getRandomNumber();
+            return generator();
         }
         /**
          * @brief Get the Random Number object
@@ -49,6 +51,43 @@ namespace generators{
          */
         void seed(result_type sseq) noexcept override
         {
+            generator.seed(sseq);
+        }
+    };
+
+
+    template <UniformRandomNumberGenerator Generator, Mutex = std::mutex>
+    class ConcurrentGeneratorGeneric : public IGenerator<typename Generator::result_type> {
+        Generator generator;
+        Mutex mtx; // Mutex for synchronization
+
+    public:
+        using result_type = typename Generator::result_type;
+
+        ConcurrentGeneratorGeneric(result_type seed) {
+            generator.seed(seed);
+        }
+
+        constexpr result_type min() const noexcept override {
+            return std::numeric_limits<result_type>::min();
+        }
+
+        constexpr result_type max() const noexcept override {
+            return std::numeric_limits<result_type>::max();
+        }
+
+        result_type operator()() override {
+            std::lock_guard<Mutex> lock(mtx); // Lock the mutex
+            return generator();
+        }
+
+        result_type getRandomNumber() override {
+            std::lock_guard<Mutex> lock(mtx); // Lock the mutex
+            return generator();
+        }
+
+        void seed(result_type sseq) noexcept override {
+            std::lock_guard<Mutex> lock(mtx); // Lock the mutex
             generator.seed(sseq);
         }
     };
@@ -75,7 +114,6 @@ namespace generators{
             void seed(uint8_t sseq) noexcept override{number = sseq;}
 
     };
-
     using GeneratorMt19937 = GeneratorGeneric<std::mt19937>;
     using GeneratorMt19937_64 = GeneratorGeneric<std::mt19937_64>;
 }

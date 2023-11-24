@@ -14,7 +14,9 @@ TEST(diceLibrary_generic, gtest_GeneratorsPredefined_integration) {
 using GeneratorTypes = ::testing::Types<
     generators::GeneratorMt19937,
     generators::GeneratorMt19937_64,
-    generators::GeneratorGeneric<generators::DumbGenerator>
+    generators::GeneratorGeneric<generators::DumbGenerator>,
+    generators::ConcurrentGeneratorGeneric<std::mt19937>,
+    generators::ConcurrentGeneratorGeneric<std::mt19937_64>
 >;
 
 using UniformRandomNumberGeneratorConceptTypes = ::testing::Types<
