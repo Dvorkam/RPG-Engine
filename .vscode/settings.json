@@ -82,7 +82,10 @@
         "xstring": "cpp",
         "xtr1common": "cpp",
         "xtree": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "*.ixx": "cpp",
+        "charconv": "cpp",
+        "format": "cpp"
     },
     "cmake.useCMakePresets": "always"
 }
