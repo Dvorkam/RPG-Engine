@@ -13,6 +13,7 @@ enable_testing()
 #find_package(doctest CONFIG REQUIRED)
 find_package(GTest CONFIG REQUIRED)
 include(GoogleTest)
+include(CTest)
 
 add_subdirectory("playground")
 #add_subdirectory("randEngine")
