@@ -29,11 +29,17 @@ endfunction()
 
 function(MD_INSTALL)
     install(
-        TARGETS ${LIB_NAME}
+        #TARGETS ${LIB_NAME}
         EXPORT "${PROJECT_NAME}Targets"
-        FILE_SET HEADERS
+        DESTINATION
+        CXX_MODULES_DIRECTORY "modules/${LIB_NAME}"
+        EXPORT_LINK_INTERFACE_LIBRARIES
         COMPONENT runtime
-        PUBLIC_HEADER DESTINATION "include/${LIB_NAME}"
         COMPONENT dev
     )
+    #install(
+    #    FILES ${MODULE_FILES}
+    #    DESTINATION "include/${LIB_NAME}"
+    #    COMPONENT dev
+    #)
 endfunction()
