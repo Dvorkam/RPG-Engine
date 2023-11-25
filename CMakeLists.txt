@@ -14,8 +14,9 @@ enable_testing()
 find_package(GTest CONFIG REQUIRED)
 include(GoogleTest)
 
-add_subdirectory("randEngine")
-add_subdirectory("dicesLibrary")
+add_subdirectory("playground")
+#add_subdirectory("randEngine")
+#add_subdirectory("dicesLibrary")
 
 #######################CONFIG GENERATION###########################
 include(GNUInstallDirs)
